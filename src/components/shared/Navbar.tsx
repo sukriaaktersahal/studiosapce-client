@@ -58,14 +58,12 @@ export default function Navbar(){
           ): user ?(
             // profile dropdown menu when user is logged in
             <DropdownMenu>
-              <DropdownMenuTrigger>
-                <button className = "flex items-center gap-2 outline-none">
-                  <Avatar className = "h-9 w-9 border">
-                    <AvatarImage src = {user.image || ""} alt = {user.name || "User"}/>
-                    <AvatarFallback>{user.name?.charAt(0).toUpperCase()}</AvatarFallback>
-                  </Avatar>
-                </button>
-              </DropdownMenuTrigger>
+                <DropdownMenuTrigger className = "flex items-center gap-2 outline-none cursor-pointer">
+                    <Avatar className ="h-9 w-9 border">
+                        <AvatarImage src ={user.image || ""} alt ={user.name || "User"} />
+                        <AvatarFallback>{user.name?.charAt(0).toUpperCase()}</AvatarFallback>
+                    </Avatar>
+                </DropdownMenuTrigger>
               <DropdownMenuContent align = "end" className = "w-56">
                 <div className = "flex flex-col space-y-1 p-2 border-b">
                   <p className = "text-sm font-medium leading-none">{user.name}</p>
