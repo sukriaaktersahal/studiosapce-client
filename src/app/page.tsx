@@ -93,7 +93,7 @@ export default function HomePage(){
               </Swiper>
             </section>
 
-            {/* featured stdio section */}
+            {/* featured studio section */}
             <section className = "py-16 container mx-auto px-4">
               <div className = "flex items-center justify-between mb-8">
                 <div>
