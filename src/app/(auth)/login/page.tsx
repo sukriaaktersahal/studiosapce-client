@@ -25,7 +25,7 @@ export default function LoginPage(){
     try{
       const { error } = await authClient.signIn.email({email, password});
       
-      if (error){
+      if(error){
         toast.error(error.message || "Login failed");
       }else{
         toast.success("Welcome back to StudioSpace!");

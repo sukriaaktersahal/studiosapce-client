@@ -1,14 +1,15 @@
-// ass-stdio page.tsx
+// add-studio page.tsx
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useSession, authClient } from "@/lib/auth-client";
+
 
 export default function AddStudioPage() {
   const router = useRouter();
@@ -54,10 +55,10 @@ export default function AddStudioPage() {
     e.preventDefault();
     setLoading(true);
 
-    try {
+    try{
       // image upload
       const imageUrl = await uploadImage();
-      if (!imageUrl) {
+      if(!imageUrl){
         toast.error("Please upload an image");
         setLoading(false);
         return;
@@ -77,9 +78,15 @@ export default function AddStudioPage() {
         rating: 5.0,   
       };
 
+      // fetch JWT token from server
+     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth-token`, {
+        credentials: "include",
+      });
+
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/studios`,{
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+        },
         body: JSON.stringify(payload),
         // JWT token is to sent cookies
         credentials: "include",
