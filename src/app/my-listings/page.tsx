@@ -1,6 +1,7 @@
 // my listing page
 "use client";
 
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 import { useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
@@ -28,6 +29,7 @@ export default function MyListingsPage(){
   const { data: session, isPending } = useSession();
   const [studios, setStudios] = useState<Studio[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
 
   // handle async function to fetch studios
   useEffect(()=> {
@@ -60,20 +62,21 @@ export default function MyListingsPage(){
   }
 
   // delete studio function
-  const handleDelete = async (id: string)=> {
-    if(!confirm("Are you sure you want to delete this studio?")) return;
+  const confirmDelete = async ()=> {
+    if(!deleteId) return;
 
     try{
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth-token`, { credentials: "include" });
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/studios/${id}`,{
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/studios/${deleteId}`,{
         method: "DELETE",
         credentials: "include",
       });
 
       if(res.ok){
         toast.success("Studio deleted successfully");
-        setStudios(studios.filter((s)=> s._id !== id));
+        setStudios(studios.filter((s)=> s._id !== deleteId));
+        setDeleteId(null);
       }else{
         toast.error("Failed to delete studio");
       }
@@ -125,13 +128,29 @@ export default function MyListingsPage(){
                       <Edit className = "h-4 w-4" /> Edit
                     </Button>
                   </Link>
-                  <Button
-                    variant = "destructive"
-                    className = "flex-1 gap-2"
-                    onClick={()=> handleDelete(studio._id)}
-                  >
-                    <Trash2 className = "h-4 w-4" /> Delete
-                  </Button>
+
+                  <Dialog open ={deleteId === studio._id} onOpenChange={() => setDeleteId(null)}>
+                    <DialogTrigger className ="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 flex-1 h-9 px-4 py-2">
+        
+                        <Trash2 className = "h-4 w-4" /> Delete
+                    
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                      <DialogTitle>Are you sure you want to delete this studio? </DialogTitle>
+                      </DialogHeader>
+                      <p className="text-gray-500 mt-2">This action cannot be undone.</p>
+                      <div className = "flex justify-end gap-2 mt-6">
+                        <Button variant = "outline" onClick={() => setDeleteId(null)}>
+                          Cancel
+                        </Button>
+                        <Button variant = "destructive" onClick={confirmDelete}>
+                          Yes,Delete
+                        </Button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+              
                 </div>
               </CardContent>
             </Card>
