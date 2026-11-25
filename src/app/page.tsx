@@ -25,14 +25,14 @@ interface Studio{
   image: string;
 }
 // demo data
-// const featuredStudios = [
-//   { id: "1", title : "Golden Hour Photo Studio", category: "Photo Studio", rate: 45, rating: 4.8, location: "Mirpur, Dhaka", image: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500"},
-//   { id: "2", title : "Studio A Sound Stage", category: "Film Stage", rate: 120, rating: 4.9, location: "Gulshan, Dhaka", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500"},
-//   { id: "3", title : "The Podcast Lounge", category: "Podcast Room", rate: 30, rating: 4.7, location: "Dhanmondi, Dhaka", image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500"},
-//   { id: "4", title : "Harmony Music Suite", category: "Music Suite", rate: 60, rating: 4.6, location: "Banani, Dhaka", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500"},
-//   { id: "5", title : "Creative Art Workshop", category: "Workshop", rate: 25, rating: 4.5, location: "Uttara, Dhaka", image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500"},
-//   { id: "6", title : "White Cyc Studio", category: "Photo Studio", rate: 55, rating: 4.9, location: "Bashundhara, Dhaka", image: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500"},
-// ];
+const featuredStudios = [
+  { id: "1", title : "Golden Hour Photo Studio", category: "Photo Studio", rate: 45, rating: 4.8, location: "Mirpur, Dhaka", image: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500"},
+  { id: "2", title : "Studio A Sound Stage", category: "Film Stage", rate: 120, rating: 4.9, location: "Gulshan, Dhaka", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500"},
+  { id: "3", title : "The Podcast Lounge", category: "Podcast Room", rate: 30, rating: 4.7, location: "Dhanmondi, Dhaka", image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500"},
+  { id: "4", title : "Harmony Music Suite", category: "Music Suite", rate: 60, rating: 4.6, location: "Banani, Dhaka", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500"},
+  { id: "5", title : "Creative Art Workshop", category: "Workshop", rate: 25, rating: 4.5, location: "Uttara, Dhaka", image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500"},
+  { id: "6", title : "White Cyc Studio", category: "Photo Studio", rate: 55, rating: 4.9, location: "Bashundhara, Dhaka", image: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500"},
+];
 
 // category data
 const categories = [

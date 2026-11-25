@@ -36,6 +36,7 @@ export default function ExploreStudiosPage(){
     const fetchStudios = async ()=>{
       try{
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/studios`);
+        if(!res.ok) throw new Error("Failed");
         const data = await res.json();
         setStudios(data);
         setFilteredStudios(data);
