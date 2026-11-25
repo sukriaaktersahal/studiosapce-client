@@ -202,6 +202,34 @@ export default function HomePage(){
               </div>
             </section>
 
+            {/* host guarantee section */}
+            <section className = "py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+              <div className = "container mx-auto px-4 text-center">
+                <h2 className = "text-3xl font-bold text-gray-900 dark:text-white mb-4">Host Guarantee & Creator Support</h2>
+                <p className = "text-gray-500 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
+                  We ensure a safe and seamless experience for both hosts and creators.
+                </p>
+                
+                <div className = "grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                  <div className = "bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border dark:border-gray-700">
+                    <h3 className = "font-semibold text-lg mb-2 dark:text-white">Liability Protection</h3>
+                    <p className = "text-sm text-gray-500 dark:text-gray-400">Comprehensive coverage for peace of mind.</p>
+                  </div>
+                  <div className = "bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border dark:border-gray-700">
+                    <h3 className = "font-semibold text-lg mb-2 dark:text-white">Verified Profiles</h3>
+                    <p className = "text-sm text-gray-500 dark:text-gray-400">Every user is authenticated and verified.</p>
+                  </div>
+                  <div className ="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border dark:border-gray-700">
+                    <h3 className ="font-semibold text-lg mb-2 dark:text-white">Equipment Safety</h3>
+                    <p className= "text-sm text-gray-500 dark:text-gray-400">Your gear is safe in our curated spaces.</p>
+                  </div>
+                  <div className ="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border dark:border-gray-700">
+                    <h3 className= "font-semibold text-lg mb-2 dark:text-white">24/7 Support</h3>
+                    <p className= "text-sm text-gray-500 dark:text-gray-400">Dedicated host and creator support team.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
 
     </div>
   );
