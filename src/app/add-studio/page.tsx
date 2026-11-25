@@ -10,8 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useSession, authClient } from "@/lib/auth-client";
 
-
-export default function AddStudioPage() {
+// addStusioPage function
+export default function AddStudioPage(){
   const router = useRouter();
   const { data: session, isPending } = useSession();
   const [loading, setLoading] = useState(false);

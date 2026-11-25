@@ -52,7 +52,7 @@ export default function Navbar(){
           <ThemeToggle/>
           {isPending ?(
             <div className = "h-8 w-24 bg-gray-200 dark:bg-gray-800 animate-pulse rounded-md"></div>
-          ): user ?(
+          ): user ? (
             // profile dropdown menu when user is logged in
             <DropdownMenu>
                 <DropdownMenuTrigger className = "flex items-center gap-2 outline-none cursor-pointer">
@@ -61,31 +61,40 @@ export default function Navbar(){
                         <AvatarFallback>{user.name?.charAt(0).toUpperCase()}</AvatarFallback>
                     </Avatar>
                 </DropdownMenuTrigger>
+
               <DropdownMenuContent align = "end" className = "w-56">
+
                 <div className = "flex flex-col space-y-1 p-2 border-b">
                   <p className = "text-sm font-medium leading-none">{user.name}</p>
                   <p className = "text-xs text-muted-foreground">{user.email}</p>
                 </div>
+
                 <DropdownMenuItem>
+
                   <Link href = "/dashboard" className = "cursor-pointer">
                     <LayoutDashboard className = "mr-2 h-4 w-4"/> Dashboard
                   </Link>
+
                 </DropdownMenuItem>
+
                 <DropdownMenuItem>
                   <Link href = "/add-studio" className = "cursor-pointer">
                     <PlusCircle className = "mr-2 h-4 w-4"/> Add New Studio
                   </Link>
                 </DropdownMenuItem>
+
                 <DropdownMenuItem>
                   <Link href = "/my-listings" className = "cursor-pointer">
                     <List className = "mr-2 h-4 w-4" /> My Studio Listings
                   </Link>
                 </DropdownMenuItem>
+
                 <DropdownMenuItem>
                   <Link href = "/my-bookings" className = "cursor-pointer">
                     <CalendarDays className = "mr-2 h-4 w-4" /> My Bookings
                   </Link>
                 </DropdownMenuItem>
+                
                 <DropdownMenuItem
                   className ="text-red-600 cursor-pointer"
                   onClick = {async ()=>{await authClient.signOut(); window.location.href = "/";}}>

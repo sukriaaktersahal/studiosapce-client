@@ -68,6 +68,7 @@ export default function LoginPage(){
                     onChange ={(e)=> setPassword(e.target.value)}
                     required/>
           </div>
+          
           {/* submit button become disable when loading */}
           <Button type ="submit" className ="w-full" disabled = {loading}>
             {loading ? "Logging in..." : "Login"}

@@ -33,7 +33,7 @@ export default function ExploreStudiosPage(){
 
   // fetch studios from the database
   useEffect(() =>{
-    const fetchStudios = async ()=> {
+    const fetchStudios = async ()=>{
       try{
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/studios`);
         const data = await res.json();
@@ -114,7 +114,7 @@ export default function ExploreStudiosPage(){
             <Card key = {studio._id} className = "overflow-hidden hover:shadow-lg transition-shadow">
               <div className = "relative h-48 w-full">
                 {/* normal image tag */}
-                <img src = {studio.image} alt ={studio.title} className = "w-full h-full object-cover" />
+                <img src = {studio.image} alt ={studio.title} className = "w-full h-full object-cover"/>
                 <Badge className = "absolute top-4 left-4 bg-white text-black hover:bg-gray-100">
                   {studio.category}
                 </Badge>

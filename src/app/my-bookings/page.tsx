@@ -12,7 +12,7 @@ import Link from "next/link";
 import { CalendarDays, Clock } from "lucide-react";
 
 // booking interface
-interface Booking {
+interface Booking{
   _id: string;
   studioId: string;
   userEmail: string;
@@ -80,7 +80,7 @@ export default function MyBookingsPage(){
   };
 
   // status badge
-  const getStatusBadge = (status: string)=> {
+  const getStatusBadge = (status: string)=>{
     switch (status) {
       case "Pending": return <Badge className = "bg-yellow-500 hover:bg-yellow-600">Pending</Badge>;
       case "Confirmed": return <Badge className = "bg-green-500 hover:bg-green-600">Confirmed</Badge>;
@@ -106,7 +106,7 @@ export default function MyBookingsPage(){
         </div>
       ) : (
         <div className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {bookings.map((booking)=> (
+          {bookings.map((booking)=>(
             <Card key = {booking._id} className = "overflow-hidden">
               <CardContent className = "p-6">
                 <div className = "flex justify-between items-start mb-4">
@@ -116,7 +116,7 @@ export default function MyBookingsPage(){
                 
                 <div className = "space-y-2 text-gray-600 text-sm mb-6">
                   <div className = "flex items-center gap-2">
-                    <CalendarDays className = "h-4 w-4" /> 
+                    <CalendarDays className = "h-4 w-4"/> 
                     Start: {new Date(booking.startTime).toLocaleString()}
                   </div>
                   <div className = "flex items-center gap-2">
@@ -126,11 +126,11 @@ export default function MyBookingsPage(){
                 </div>
 
                 {booking.status === "Pending" && (
-                  <Button 
-                    variant = "destructive" 
-                    className = "w-full" 
-                    onClick={()=> handleCancel(booking._id)}>
-                    Cancel Booking
+                   
+                  <Button variant = "destructive" 
+                          className = "w-full" 
+                          onClick= {()=> handleCancel(booking._id)}>
+                          Cancel Booking
                   </Button>
                 )}
               </CardContent>

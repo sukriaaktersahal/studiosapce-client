@@ -100,6 +100,7 @@ export default function EditStudioPage(){
       <h1 className = "text-3xl font-bold mb-6">Edit Studio</h1>
       
       <form onSubmit = {handleSubmit} className = "space-y-5 bg-white p-8 rounded-xl shadow-sm border">
+
         <div>
           <Label>Studio Title</Label>
           <Input required value = {formData.title} onChange = {(e)=> setFormData({...formData, title: e.target.value})}/>
@@ -120,25 +121,31 @@ export default function EditStudioPage(){
         </div>
 
         <div className = "grid grid-cols-2 gap-4">
+
           <div>
             <Label>Hourly Rate ($)</Label>
             <Input type = "number" required value = {formData.hourlyRate} onChange = {(e)=> setFormData({...formData, hourlyRate: e.target.value})}/>
           </div>
+
           <div>
             <Label>Security Deposit ($)</Label>
             <Input type = "number" required value = {formData.securityDeposit} onChange = {(e)=> setFormData({...formData, securityDeposit: e.target.value})}/>
           </div>
+
         </div>
 
         <div className = "grid grid-cols-2 gap-4">
+
           <div>
             <Label>Max Capacity (People)</Label>
             <Input type = "number" required value = {formData.maxCapacity} onChange = {(e)=> setFormData({...formData, maxCapacity: e.target.value})}/>
           </div>
+
           <div>
             <Label>Location / Address</Label>
             <Input required value = {formData.location} onChange = {(e)=> setFormData({...formData, location: e.target.value})}/>
           </div>
+
         </div>
 
         <div>
@@ -153,14 +160,17 @@ export default function EditStudioPage(){
 
         {/* read-only owner info */}
         <div className = "grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg">
+
           <div>
             <Label>Owner Name</Label>
             <Input disabled value ={session.user.name}/>
           </div>
+
           <div>
             <Label>Owner Email</Label>
             <Input disabled value= {session.user.email}/>
           </div>
+          
         </div>
 
         <Button type = "submit" className = "w-full" disabled={updating}>

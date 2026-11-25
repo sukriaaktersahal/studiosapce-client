@@ -5,6 +5,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/shared/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
+import Footer from "@/components/shared/Footer"; 
 
 // Inter font for latin characters
 const inter = Inter({ subsets: ["latin"] });
@@ -21,9 +22,14 @@ export default function RootLayout({ children, }: {children:React.ReactNode;
   return(
     <html lang ="en" suppressHydrationWarning> 
       <body className = {inter.className}>
-        <ThemeProvider attribute = "class" defaultTheme = "system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute = "class" defaultTheme = "system" enableSystem >
         <Navbar />
-        <main className = "min-h-screen">{children}</main>
+        <main className = "min-h-screen flex flex-col">
+          <div className= "flex-grow">
+            {children}
+          </div>
+          <Footer/>
+          </main>
         <Toaster position = "top-right" richColors />
         </ThemeProvider>
       </body>

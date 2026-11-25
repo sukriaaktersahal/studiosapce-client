@@ -39,7 +39,6 @@ export default function MyListingsPage(){
       try{
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/studios`);
         const allStudios: Studio[] = await res.json();
-        
         const myStudios = allStudios.filter(
           (studio)=> studio.ownerEmail === session.user.email
         );
@@ -109,18 +108,19 @@ export default function MyListingsPage(){
           {studios.map((studio)=> (
             <Card key = {studio._id} className = "overflow-hidden">
               <div className = "relative h-48 w-full bg-gray-200">
+
                 {/* use of next.js image */}
-                <Image
-                  src = {studio.image}
-                  alt = {studio.title}
-                  fill 
-                  className = "object-cover"/>
+                <Image  src = {studio.image}
+                        alt = {studio.title}
+                        fill 
+                        className = "object-cover"/>
               </div>
               <CardContent className = "p-5">
                 <div className = "flex justify-between items-start mb-2">
                   <h3 className = "text-xl font-bold">{studio.title}</h3>
                   <Badge>{studio.category}</Badge>
                 </div>
+
                 <p className = "text-gray-500 text-sm mb-4">{studio.location}</p>
                 <div className = "flex items-center gap-2 mt-4">
                   <Link href = {`/studios/edit/${studio._id}`} className = "flex-1">
@@ -132,22 +132,22 @@ export default function MyListingsPage(){
                   <Dialog open ={deleteId === studio._id} onOpenChange={() => setDeleteId(null)}>
                     <DialogTrigger className ="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 flex-1 h-9 px-4 py-2">
         
-                        <Trash2 className = "h-4 w-4" /> Delete
+                        <Trash2 className = "h-4 w-4"/> Delete
                     
                     </DialogTrigger>
                     <DialogContent>
+
                       <DialogHeader>
                       <DialogTitle>Are you sure you want to delete this studio? </DialogTitle>
                       </DialogHeader>
+
                       <p className="text-gray-500 mt-2">This action cannot be undone.</p>
+
                       <div className = "flex justify-end gap-2 mt-6">
-                        <Button variant = "outline" onClick={() => setDeleteId(null)}>
-                          Cancel
-                        </Button>
-                        <Button variant = "destructive" onClick={confirmDelete}>
-                          Yes,Delete
-                        </Button>
+                        <Button variant = "outline" onClick={() => setDeleteId(null)}>Cancel</Button>
+                        <Button variant = "destructive" onClick={confirmDelete}>Yes,Delete</Button>
                       </div>
+                      
                     </DialogContent>
                   </Dialog>
               

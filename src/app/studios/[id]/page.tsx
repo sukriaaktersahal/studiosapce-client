@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star, MapPin, Clock, Users, DollarSign, Calendar } from "lucide-react";
 
 // studio interface
-interface Studio {
+interface Studio{
   _id: string;
   title: string;
   category: string;
@@ -28,7 +28,7 @@ interface Studio {
 }
 
 // Studio details page component
-export default function StudioDetailsPage() {
+export default function StudioDetailsPage(){
   const params = useParams();
   const router = useRouter();
   const { data: session } = useSession();
@@ -43,7 +43,7 @@ export default function StudioDetailsPage() {
 
   // fetch studio data
   useEffect(() =>{
-    const fetchStudio = async ()=> {
+    const fetchStudio = async ()=>{
       try{
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/studios/${params.id}`);
         const data = await res.json();
@@ -58,7 +58,7 @@ export default function StudioDetailsPage() {
   }, [params.id]);
 
   // booking submit handler
-  const handleBooking = async (e: React.FormEvent)=> {
+  const handleBooking = async (e: React.FormEvent)=>{
     e.preventDefault();
     if(!session){
       toast.error("Please login to book a studio");
@@ -98,9 +98,10 @@ export default function StudioDetailsPage() {
   return(
     <div className = "container mx-auto py-10 px-4 max-w-5xl">
       <div className = "grid grid-cols-1 md:grid-cols-2 gap-10">
+
         {/* left side image */}
         <div>
-          <img src = {studio.image} alt ={studio.title} className = "w-full h-96 object-cover rounded-xl shadow-lg" />
+          <img src = {studio.image} alt ={studio.title} className = "w-full h-96 object-cover rounded-xl shadow-lg"/>
         </div>
 
         {/* right side information */}
@@ -109,8 +110,8 @@ export default function StudioDetailsPage() {
           <h1 className ="text-4xl font-bold text-gray-900 mb-4">{studio.title}</h1>
           
           <div className= "flex items-center gap-4 text-gray-600 mb-6">
-            <span className ="flex items-center gap-1"><MapPin className ="h-4 w-4" /> {studio.location}</span>
-            <span className= "flex items-center gap-1"><Star className ="h-4 w-4 text-yellow-500 fill-yellow-500" /> {studio.rating || 5.0}</span>
+            <span className ="flex items-center gap-1"><MapPin className ="h-4 w-4"/> {studio.location}</span>
+            <span className= "flex items-center gap-1"><Star className ="h-4 w-4 text-yellow-500 fill-yellow-500"/> {studio.rating || 5.0}</span>
           </div>
 
           <p className ="text-gray-600 mb-8">{studio.detailedOverview}</p>
