@@ -5,12 +5,8 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {authClient} from "@/lib/auth-client";
 import {Button} from "@/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { ThemeToggle } from "./ThemeToggle";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Camera, LogOut, PlusCircle, LayoutDashboard, List, CalendarDays } from "lucide-react";
 
@@ -30,12 +26,12 @@ export default function Navbar(){
 
   return(
     // sticky header
-    <header className = "sticky top-0 z-50 w-full border-b bg-white/90 backdrop-blur "> 
+    <header className = "sticky top-0 z-50 w-full border-b bg-white/90 dark:bg-gray-950/90 backdrop-blur "> 
       <div className = "container mx-auto px-4 h-16 flex items-center justify-between">
         
         {/* logo section */}
         <Link href = "/" className = "flex items-center gap-2">
-          <Camera className= "h-6 w-6 text-black"/>
+          <Camera className= "h-6 w-6 text-black dark:text-white"/>
           <span className = "font-bold text-xl tracking-tight">StudioSpace</span>
         </Link>
 
@@ -44,8 +40,8 @@ export default function Navbar(){
           {navLinks.map((link) =>(
            <Link key = {link.name}
                  href = {link.href}
-                 className = {`text-sm font-medium transition-colors hover:text-black ${
-                 pathname === link.href ? "text-black border-b-2 border-black" : "text-gray-500"}`}>
+                 className = {`text-sm font-medium transition-colors hover:text-black dark:hover:text-white ${
+                 pathname === link.href ? "text-black dark:text-white border-b-2 border-black" : "text-gray-500 dark:text-gray-400"}`}>
               {link.name}
             </Link>
           ))}
@@ -53,8 +49,9 @@ export default function Navbar(){
 
         {/* right side actions */}
         <div className = "flex items-center gap-4">
+          <ThemeToggle/>
           {isPending ?(
-            <div className = "h-8 w-24 bg-gray-200 animate-pulse rounded-md"></div>
+            <div className = "h-8 w-24 bg-gray-200 dark:bg-gray-800 animate-pulse rounded-md"></div>
           ): user ?(
             // profile dropdown menu when user is logged in
             <DropdownMenu>
@@ -91,10 +88,7 @@ export default function Navbar(){
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   className ="text-red-600 cursor-pointer"
-                  onClick = {async () =>{
-                    await authClient.signOut(); 
-                    window.location.href = "/"; 
-                  }}>
+                  onClick = {async ()=>{await authClient.signOut(); window.location.href = "/";}}>
 
                   <LogOut className = "mr-2 h-4 w-4"/> Logout
                 </DropdownMenuItem>

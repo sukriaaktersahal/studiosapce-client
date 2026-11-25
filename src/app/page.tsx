@@ -54,7 +54,7 @@ export default function HomePage(){
   ];
 
   return(
-    <div className ="flex flex-col min-h-screen">
+    <div className ="flex flex-col min-h-screen dark:bg-gray-950 transition-colors duration-300">
 
       {/* hero section */}
             <section className = "w-full h-[500px] md:h-[600px]">
@@ -97,17 +97,17 @@ export default function HomePage(){
             <section className = "py-16 container mx-auto px-4">
               <div className = "flex items-center justify-between mb-8">
                 <div>
-                  <h2 className = "text-3xl font-bold text-gray-900">Featured Studios</h2>
-                  <p className ="text-gray-500 mt-2">Discover top-rated creative spaces for your next shoot.</p>
+                  <h2 className = "text-3xl font-bold text-gray-900 dark:text-white mb-4">Featured Studios</h2>
+                  <p className ="text-gray-500 dark:text-gray-400 mt-2">Discover top-rated creative spaces for your next shoot.</p>
                 </div>
-                <Link href ="/studios" className= "text-blue-600 font-medium hover:underline flex items-center gap-1">
+                <Link href ="/studios" className= "text-blue-600 dark:text-blue-400 font-medium hover:underline flex items-center gap-1">
                   View All <ArrowRight className= "h-4 w-4" />
                 </Link>
               </div>
 
               {/* grid */}
               <div className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">{featuredStudios.map((studio)=>(
-                  <Card key = {studio.id} className = "overflow-hidden hover:shadow-lg transition-shadow">
+                  <Card key = {studio.id} className = "overflow-hidden hover:shadow-lg transition-shadow dark:bg-gray-900 dark:border-gray-800">
 
                     <div className = "relative h-48 w-full">
                       <img src = {studio.image} alt = {studio.title} className = "w-full h-full object-cover"/>
@@ -118,12 +118,12 @@ export default function HomePage(){
                     </div>
 
                     <CardContent className = "p-5">
-                      <h3 className = "text-xl font-bold text-gray-900 mb-2">{studio.title}</h3>
-                      <div className = "flex items-center text-gray-500 text-sm mb-4"><MapPin className = "h-4 w-4 mr-1"/> {studio.location}</div>
+                      <h3 className = "text-xl font-bold text-gray-900 dark:text-white mb-2">{studio.title}</h3>
+                      <div className = "flex items-center text-gray-500 dark:text-gray-400 text-sm mb-4"><MapPin className = "h-4 w-4 mr-1"/> {studio.location}</div>
                       <div className ="flex items-center justify-between mt-auto">
-                        <div className = "text-2xl font-bold text-gray-900">${studio.rate} <span className = "text-sm font-normal text-gray-500">/ hr</span></div>
+                        <div className = "text-2xl font-bold text-gray-900 dark:text-white">${studio.rate} <span className = "text-sm font-normal text-gray-500">/ hr</span></div>
                         <Link href = {`/studios/${studio.id}`}>
-                          <Button size = "sm" variant = "outline">View Details</Button>
+                          <Button size = "sm" variant = "outline" className = "dark:border-gray-700 dark:text-gray-300">View Details</Button>
                         </Link>
                       </div>
                     </CardContent>
@@ -133,21 +133,21 @@ export default function HomePage(){
             </section>
 
             {/* browse by category  */}
-            <section className = "py-16 bg-gray-50">
+            <section className = "py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
               <div className = "container mx-auto px-4 text-center">
-                <h2 className = "text-3xl font-bold text-gray-900 mb-4">Browse by Category</h2>
-                <p className = "text-gray-500 mb-10">Find the perfect space based on what you need.</p>
+                <h2 className = "text-3xl font-bold text-gray-900 dark:text-white mb-4">Browse by Category</h2>
+                <p className = "text-gray-500 dark:text-gray-400 mb-10">Find the perfect space based on what you need.</p>
                 
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
                   {categories.map((cat, index) =>{
                     const Icon = cat.icon;
                     return(
                       <Link key = {index} href = {`/studios?category = ${encodeURIComponent(cat.name)}`}>
-                        <div className = "flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all border hover:border-blue-200">
+                        <div className = "flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-all border dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-800">
                           <div className = {`p-4 rounded-full ${cat.color} mb-4`}>
                             <Icon className = "h-8 w-8"/>
                           </div>
-                          <span className = "font-medium text-gray-900 text-sm md:text-base text-center">{cat.name}</span>
+                          <span className = "font-medium text-gray-900 dark:text-white text-sm md:text-base text-center">{cat.name}</span>
                         </div>
                       </Link>
                     );
@@ -159,8 +159,8 @@ export default function HomePage(){
 
             {/* booking woring process */}
             <section className = "py-16 container mx-auto px-4 text-center">
-              <h2 className = "text-3xl font-bold text-gray-900 mb-4">How Booking Works</h2>
-              <p className = "text-gray-500 mb-12 max-w-2xl mx-auto">From discovering the right space to wrapping up your shoot, we make the process seamless.</p>
+              <h2 className = "text-3xl font-bold text-gray-900 dark:text-white mb-4">How Booking Works</h2>
+              <p className = "text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">From discovering the right space to wrapping up your shoot, we make the process seamless.</p>
               
               <div className = "grid grid-cols-1 md:grid-cols-4 gap-8">
                 {[
@@ -170,11 +170,11 @@ export default function HomePage(){
                   { step: "4", title: "Create & Produce", desc: "Show up and bring your creative vision to life." },
                 ].map((item)=> (
                   <div key ={item.step} className = "flex flex-col items-center">
-                    <div className = "w-16 h-16 bg-black text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4">
+                    <div className = "w-16 h-16 bg-black dark:bg-white text-white dark:text-black rounded-full flex items-center justify-center text-2xl font-bold mb-4 transition-colors duration-300">
                       {item.step}
                     </div>
-                    <h3 className = "text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                    <p className = "text-gray-500">{item.desc}</p>
+                    <h3 className = "text-xl font-bold text-gray-900 dark:text-white mb-2">{item.title}</h3>
+                    <p className = "text-gray-500 dark:text-gray-400">{item.desc}</p>
                   </div>
                 ))}
               </div>

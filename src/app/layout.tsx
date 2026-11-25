@@ -4,6 +4,7 @@ import {Inter} from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/shared/Navbar";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // Inter font for latin characters
 const inter = Inter({ subsets: ["latin"] });
@@ -18,11 +19,13 @@ export const metadata: Metadata ={
 export default function RootLayout({ children, }: {children:React.ReactNode;
 }){
   return(
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang ="en" suppressHydrationWarning> 
+      <body className = {inter.className}>
+        <ThemeProvider attribute = "class" defaultTheme = "system" enableSystem disableTransitionOnChange>
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main className = "min-h-screen">{children}</main>
         <Toaster position = "top-right" richColors />
+        </ThemeProvider>
       </body>
     </html>
   );
