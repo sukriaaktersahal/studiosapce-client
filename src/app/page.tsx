@@ -1,5 +1,6 @@
-// client home page
+ // client home page
 "use client";
+import { useState, useEffect } from "react"; 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -13,15 +14,25 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+// studio interface
+interface Studio{
+  _id: string;
+  title: string;
+  category: string;
+  hourlyRate: number;
+  location: string;
+  rating: number;
+  image: string;
+}
 // demo data
-const featuredStudios = [
-  { id: "1", title : "Golden Hour Photo Studio", category: "Photo Studio", rate: 45, rating: 4.8, location: "Mirpur, Dhaka", image: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500"},
-  { id: "2", title : "Studio A Sound Stage", category: "Film Stage", rate: 120, rating: 4.9, location: "Gulshan, Dhaka", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500"},
-  { id: "3", title : "The Podcast Lounge", category: "Podcast Room", rate: 30, rating: 4.7, location: "Dhanmondi, Dhaka", image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500"},
-  { id: "4", title : "Harmony Music Suite", category: "Music Suite", rate: 60, rating: 4.6, location: "Banani, Dhaka", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500"},
-  { id: "5", title : "Creative Art Workshop", category: "Workshop", rate: 25, rating: 4.5, location: "Uttara, Dhaka", image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500"},
-  { id: "6", title : "White Cyc Studio", category: "Photo Studio", rate: 55, rating: 4.9, location: "Bashundhara, Dhaka", image: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500"},
-];
+// const featuredStudios = [
+//   { id: "1", title : "Golden Hour Photo Studio", category: "Photo Studio", rate: 45, rating: 4.8, location: "Mirpur, Dhaka", image: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500"},
+//   { id: "2", title : "Studio A Sound Stage", category: "Film Stage", rate: 120, rating: 4.9, location: "Gulshan, Dhaka", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500"},
+//   { id: "3", title : "The Podcast Lounge", category: "Podcast Room", rate: 30, rating: 4.7, location: "Dhanmondi, Dhaka", image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500"},
+//   { id: "4", title : "Harmony Music Suite", category: "Music Suite", rate: 60, rating: 4.6, location: "Banani, Dhaka", image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500"},
+//   { id: "5", title : "Creative Art Workshop", category: "Workshop", rate: 25, rating: 4.5, location: "Uttara, Dhaka", image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500"},
+//   { id: "6", title : "White Cyc Studio", category: "Photo Studio", rate: 55, rating: 4.9, location: "Bashundhara, Dhaka", image: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=500"},
+// ];
 
 // category data
 const categories = [
@@ -34,6 +45,17 @@ const categories = [
 
 // homepage function
 export default function HomePage(){
+  // state
+  const [featuredStudios, setFeaturedStudios] = useState<Studio[]>([]);
+
+  // fetch data
+  useEffect(()=>{
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/studios?limit=6`)
+    .then(res => res.json())
+    .then(data => setFeaturedStudios(data))
+    .catch(err => console.error(err));
+  }, []);
+
   // slider data
   const slides = [
     {
@@ -106,14 +128,14 @@ export default function HomePage(){
               </div>
 
               {/* grid */}
-              <div className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">{featuredStudios.map((studio)=>(
-                  <Card key = {studio.id} className = "overflow-hidden hover:shadow-lg transition-shadow dark:bg-gray-900 dark:border-gray-800">
+              <div className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">{featuredStudios.map((studio: Studio)=>(
+                  <Card key={studio._id} className = "overflow-hidden hover:shadow-lg transition-shadow dark:bg-gray-900 dark:border-gray-800">
 
                     <div className = "relative h-48 w-full">
                       <img src = {studio.image} alt = {studio.title} className = "w-full h-full object-cover"/>
                       <Badge className ="absolute top-4 left-4 bg-white text-black hover:bg-gray-100">{studio.category}</Badge>
                       <Badge className ="absolute top-4 right-4 bg-yellow-400 text-black hover:bg-yellow-500 flex items-center gap-1">
-                        <Star className = "h-3 w-3 fill-black"/> {studio.rating}
+                        <Star className = "h-3 w-3 fill-black"/> {studio.rating || 5.0}
                       </Badge>
                     </div>
 
@@ -121,8 +143,8 @@ export default function HomePage(){
                       <h3 className = "text-xl font-bold text-gray-900 dark:text-white mb-2">{studio.title}</h3>
                       <div className = "flex items-center text-gray-500 dark:text-gray-400 text-sm mb-4"><MapPin className = "h-4 w-4 mr-1"/> {studio.location}</div>
                       <div className ="flex items-center justify-between mt-auto">
-                        <div className = "text-2xl font-bold text-gray-900 dark:text-white">${studio.rate} <span className = "text-sm font-normal text-gray-500">/ hr</span></div>
-                        <Link href = {`/studios/${studio.id}`}>
+                        <div className = "text-2xl font-bold text-gray-900 dark:text-white">${studio.hourlyRate} <span className = "text-sm font-normal text-gray-500">/ hr</span></div>
+                        <Link href = {`/studios/${studio._id}`}>
                           <Button size = "sm" variant = "outline" className = "dark:border-gray-700 dark:text-gray-300">View Details</Button>
                         </Link>
                       </div>
@@ -142,7 +164,7 @@ export default function HomePage(){
                   {categories.map((cat, index) =>{
                     const Icon = cat.icon;
                     return(
-                      <Link key = {index} href = {`/studios?category = ${encodeURIComponent(cat.name)}`}>
+                      <Link key = {index} href = {`/studios?category=${encodeURIComponent(cat.name)}`}>
                         <div className = "flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-all border dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-800">
                           <div className = {`p-4 rounded-full ${cat.color} mb-4`}>
                             <Icon className = "h-8 w-8"/>

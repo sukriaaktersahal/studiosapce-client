@@ -46,9 +46,13 @@ export default function StudioDetailsPage(){
     const fetchStudio = async ()=>{
       try{
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/studios/${params.id}`);
+        if(!res.ok){
+          throw new Error("Failed to fetch");
+        }
         const data = await res.json();
         setStudio(data);
-      }catch{
+      }catch(error){
+        console.error(error);
         toast.error("Failed to load studio");
       }finally{
         setLoading(false);
@@ -92,8 +96,8 @@ export default function StudioDetailsPage(){
     }
   };
 
-  if(loading) return <div className = "text-center py-20">Loading...</div>;
-  if(!studio) return <div className = "text-center py-20">Studio not found</div>;
+  if(loading) return <div className = "text-center py-20 dark:text-white">Loading...</div>;
+  if(!studio) return <div className = "text-center py-20 dark:text-white">Studio not found</div>;
 
   return(
     <div className = "container mx-auto py-10 px-4 max-w-5xl">
@@ -107,23 +111,23 @@ export default function StudioDetailsPage(){
         {/* right side information */}
         <div>
           <Badge className ="mb-4">{studio.category}</Badge>
-          <h1 className ="text-4xl font-bold text-gray-900 mb-4">{studio.title}</h1>
+          <h1 className ="text-4xl font-bold text-gray-900 dark:text-white mb-4">{studio.title}</h1>
           
-          <div className= "flex items-center gap-4 text-gray-600 mb-6">
+          <div className= "flex items-center gap-4 text-gray-600 dark:text-gray-400 mb-6">
             <span className ="flex items-center gap-1"><MapPin className ="h-4 w-4"/> {studio.location}</span>
             <span className= "flex items-center gap-1"><Star className ="h-4 w-4 text-yellow-500 fill-yellow-500"/> {studio.rating || 5.0}</span>
           </div>
 
-          <p className ="text-gray-600 mb-8">{studio.detailedOverview}</p>
+          <p className ="text-gray-600 dark:text-gray-400 mb-8">{studio.detailedOverview}</p>
 
           <div className ="grid grid-cols-2 gap-4 mb-8">
-            <div className = "flex items-center gap-2 text-gray-700"><Users className = "h-5 w-5 text-blue-500" /> Max {studio.maxCapacity} People</div>
-            <div className = "flex items-center gap-2 text-gray-700"><DollarSign className = "h-5 w-5 text-green-500" /> ${studio.hourlyRate} / hr</div>
-            <div className = "flex items-center gap-2 text-gray-700"><Clock className= "h-5 w-5 text-orange-500" /> Deposit: ${studio.securityDeposit}</div>
+            <div className = "flex items-center gap-2 text-gray-700 dark:text-gray-300"><Users className = "h-5 w-5 text-blue-500" /> Max {studio.maxCapacity} People</div>
+            <div className = "flex items-center gap-2 text-gray-700 dark:text-gray-300"><DollarSign className = "h-5 w-5 text-green-500" /> ${studio.hourlyRate} / hr</div>
+            <div className = "flex items-center gap-2 text-gray-700 dark:text-gray-300"><Clock className= "h-5 w-5 text-orange-500" /> Deposit: ${studio.securityDeposit}</div>
           </div>
 
           <div className = "mb-8">
-            <h3 className = "font-semibold mb-2">Amenities</h3>
+            <h3 className = "font-semibold mb-2 text-gray-900 dark:text-white">Amenities</h3>
             <div className = "flex flex-wrap gap-2">
               {studio.amenities.map((item, idx) =>(
                 <Badge key = {idx} variant = "secondary">{item}</Badge>
@@ -140,16 +144,16 @@ export default function StudioDetailsPage(){
       {/* Booking Modal */}
       {showBookingModal && (
         <div className = "fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className = "w-full max-w-md p-6">
-            <h2 className ="text-2xl font-bold mb-4">Book {studio.title}</h2>
+          <Card className = "w-full max-w-md p-6 bg-white dark:bg-gray-900">
+            <h2 className ="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Book {studio.title}</h2>
             <form onSubmit = {handleBooking} className = "space-y-4">
               <div>
-                <label className = "block text-sm font-medium mb-1">Start Date & Time</label>
-                <input type = "datetime-local" required className = "w-full border p-2 rounded" value = {startDate} onChange = {(e)=> setStartDate(e.target.value)}/>
+                <label className = "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Start Date & Time</label>
+                <input type = "datetime-local" required className = "w-full border p-2 rounded bg-transparent dark:text-white" value = {startDate} onChange = {(e)=> setStartDate(e.target.value)}/>
               </div>
               <div>
-                <label className = "block text-sm font-medium mb-1">End Date & Time</label>
-                <input type = "datetime-local" required className = "w-full border p-2 rounded" value = {endDate} onChange = {(e)=> setEndDate(e.target.value)}/>
+                <label className = "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">End Date & Time</label>
+                <input type = "datetime-local" required className = "w-full border p-2 rounded bg-transparent dark:text-white" value = {endDate} onChange = {(e)=> setEndDate(e.target.value)}/>
               </div>
               <div className = "flex gap-4 pt-4">
                 <Button type = "button" variant = "outline" className = "flex-1" onClick = {()=> setShowBookingModal(false)}>Cancel</Button>

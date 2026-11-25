@@ -71,8 +71,8 @@ export default function ExploreStudiosPage(){
     <div className = "container mx-auto py-10 px-4">
       <div className = "flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
-          <h1 className = "text-3xl font-bold text-gray-900">Explore Studios</h1>
-          <p className = "text-gray-500 mt-2">Find the perfect space for your creative project.</p>
+          <h1 className = "text-3xl font-bold text-gray-900 dark:text-white">Explore Studios</h1>
+          <p className = "text-gray-500 dark:text-gray-400 mt-2">Find the perfect space for your creative project.</p>
         </div>
 
         {/* search bar */}
@@ -81,7 +81,7 @@ export default function ExploreStudiosPage(){
           <input
             type = "text"
             placeholder = "Search studios..."
-            className = "w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+            className = "w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black dark:bg-transparent dark:text-white dark:border-gray-700"
             value = {searchQuery}
             onChange = {(e)=> setSearchQuery(e.target.value)}/>
         </div>
@@ -102,11 +102,11 @@ export default function ExploreStudiosPage(){
 
       {/* studios grid */}
       {loading ? (
-        <div className = "text-center py-20">Loading studios...</div>
+        <div className = "text-center py-20 dark:text-white">Loading studios...</div>
       ) : filteredStudios.length === 0 ? (
-        <div className = "text-center py-20">
-          <h3 className = "text-xl font-semibold mb-2">No studios found</h3>
-          <p className = "text-gray-500">Try changing your search or category filter.</p>
+        <div className = "text-center py-20 ">
+          <h3 className = "text-xl font-semibold mb-2 dark:text-white">No studios found</h3>
+          <p className = "text-gray-500 dark:text-gray-400">Try changing your search or category filter.</p>
         </div>
       ) : (
         <div className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -123,13 +123,13 @@ export default function ExploreStudiosPage(){
                 </Badge>
               </div>
               <CardContent className = "p-5">
-                <h3 className = "text-xl font-bold text-gray-900 mb-2">{studio.title}</h3>
-                <div className = "flex items-center text-gray-500 text-sm mb-4">
+                <h3 className = "text-xl font-bold text-gray-900 dark:text-white mb-2">{studio.title}</h3>
+                <div className = "flex items-center text-gray-500 dark:text-gray-400 text-sm mb-4">
                   <MapPin className = "h-4 w-4 mr-1" /> {studio.location}
                 </div>
                 <div className= "flex items-center justify-between mt-auto">
-                  <div className ="text-2xl font-bold text-gray-900">
-                    ${studio.hourlyRate} <span className ="text-sm font-normal text-gray-500">/ hr</span>
+                  <div className ="text-2xl font-bold text-gray-900 dark:text-white">
+                    ${studio.hourlyRate} <span className ="text-sm font-normal text-gray-500 dark:text-gray-400">/ hr</span>
                   </div>
                   <Link href ={`/studios/${studio._id}`}>
                     <Button size ="sm" variant ="outline">View Details</Button>
