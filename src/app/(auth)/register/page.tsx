@@ -27,6 +27,14 @@ export default function RegisterPage(){
     if(!/[a-z]/.test(pwd)) return "Password must contain a lowercase letter";
     return null; 
   };
+
+  const handleGoogleLogin = async () =>{
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "http://localhost:3000/",
+    });
+  };
+
 // handling register function
   const handleRegister = async (e: React.FormEvent) =>{
     e.preventDefault();
@@ -104,6 +112,9 @@ export default function RegisterPage(){
             {loading ? "Creating account..." : "Register"}
           </Button>
         </form>
+
+        <Button type = "button" variant = "outline" className ="w-full mt-4"
+             onClick={handleGoogleLogin}>Continue with Google</Button>
 
         <p className = "mt-6 text-center text-sm text-gray-600">
           Already have an account?{" "}

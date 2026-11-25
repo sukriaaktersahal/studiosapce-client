@@ -16,6 +16,13 @@ export default function LoginPage(){
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+
+  const handleGoogleLogin = async () =>{
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "http://localhost:3000/",
+    });
+  };
 //   handling login function
   const handleLogin = async (e: React.FormEvent) =>{
     e.preventDefault(); 
@@ -74,6 +81,11 @@ export default function LoginPage(){
             {loading ? "Logging in..." : "Login"}
           </Button>
         </form>
+
+        <Button type= "button" variant= "outline" className ="w-full mt-4" 
+          onClick={handleGoogleLogin}>
+            Continue with Google
+          </Button>
 
         {/* registration page linkk */}
         <p className = "mt-6 text-center text-sm text-gray-600">
